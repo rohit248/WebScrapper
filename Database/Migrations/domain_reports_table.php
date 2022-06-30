@@ -41,7 +41,7 @@ class DomainReportsTable{
      * Create Table data_reports 
      * @param int ID - Primary key of table with auto increment 
      * @param string domain - URL for data scrapping
-     * @param int report_id - A unique id given to every report , it is a combination of current timestamp with 4 random numbers
+     * @param int report_id - A unique id given to every report , it is a combination of current timestamp with 5 random Alphabates
      * @param json domain_data - All the recieved from url stored in json format
      * @param time updated_at - Timestamp of last updation in table row
      * @param time created_at - Timestamp of row creation time
@@ -61,7 +61,7 @@ class DomainReportsTable{
             $sql ="CREATE table $this->tableName(
             `ID` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY,
             `domain` VARCHAR( 500 ) NOT NULL, 
-            `report_id` INT( 14 ) NOT NULL, 
+            `report_id` VARCHAR( 15 ) NOT NULL, 
             `domain_data` JSON NOT NULL ,
             `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
             `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
