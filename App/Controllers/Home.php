@@ -7,7 +7,6 @@ use \Core\View;
 use \App\Helpers\DataHelper;
 use \App\Helpers\CurlHelper;
 use \App\Models\DomainReports;
-use App\Config;
 
 /**
  * Home controller
@@ -68,7 +67,7 @@ class Home extends \Core\Controller
         }
 
         /* Redirect browser */
-        header( "Location:". Config::APP_URL."/report?report_id=$reportID" );
+        header( "Location:". getenv('APP_URL')."/report?report_id=$reportID" );
         
     }
 
@@ -85,13 +84,13 @@ class Home extends \Core\Controller
         if (empty($report_id) || strlen($report_id) != 14) 
         {   
             //Redirect To home Page if Report id is not valid
-            header( "Location:". Config::APP_URL );
+            header( "Location:". getenv('APP_URL') );
         }
 
         $report_details = DomainReports::getDataByReportID($report_id);
         
         if (!$report_details) {
-            header( "Location:". Config::APP_URL );
+            header( "Location:". getenv('APP_URL') );
         }
 
         $report_details['domain_data'] = json_decode($report_details['domain_data'], true);

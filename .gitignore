@@ -2,3 +2,4 @@ vendor
 logs/*
 !logs/.keep 
 composer.lock
+.env

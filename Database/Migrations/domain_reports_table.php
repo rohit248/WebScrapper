@@ -1,8 +1,8 @@
 <?php
 
-require dirname(dirname(__DIR__)) . '/App/Config.php';
+require dirname(dirname(__DIR__)) . '/Core/EnvParser.php';
 
-use App\Config;
+use Core\EnvParser;
 
 
 /**
@@ -16,6 +16,7 @@ class DomainReportsTable{
      */
     public function initiateMigration()
     {
+        (new EnvParser(dirname(dirname(__DIR__)). '/.env'))->load();
         echo "Initiating Migration.....!!!\n";
         $this->tableName = 'domain_reports';
         $this->db = null;
@@ -30,8 +31,8 @@ class DomainReportsTable{
      */
     public function getDBConnection()
     {
-        $dsn = 'mysql:host=' . Config::DB_HOST . ';dbname=' . Config::DB_NAME . ';charset=utf8';
-        $this->db = new PDO($dsn, Config::DB_USER, Config::DB_PASSWORD);
+        $dsn = 'mysql:host=' . getenv('DB_HOST') . ';dbname=' . getenv('DB_NAME') . ';charset=utf8';
+        $this->db = new PDO($dsn, getenv('DB_USER'), getenv('DB_PASSWORD'));
 
         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         echo "DB Connection Successfull....!!!\n";
